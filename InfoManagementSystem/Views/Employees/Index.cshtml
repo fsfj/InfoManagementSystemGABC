@@ -1,0 +1,153 @@
+﻿@model IEnumerable<InfoManagementSystem.Models.Employee>
+
+@using InfoManagementSystem.Models
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#list">Employee List</a></li>
+        <li><a data-toggle="tab" href="#new">Add New</a></li>
+    </ul>
+
+    <div class="tab-content">
+        <div id="list" class="tab-pane fade in active">
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>
+                            Last Name
+                        </th>
+                        <th>
+                            First Name
+                        </th>
+                        <th>
+                            Middle Name
+                        </th>
+                        <th>
+                            Date Hired
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody class="tbody">
+                </tbody>
+            </table>
+        </div>
+        <div id="new" class="tab-pane fade">
+            <div class="container">
+                <div class="form-horizontal">
+                    <form>
+                        <div class="form-group">
+                            <label for="lastName">Last Name</label>
+                            <input type="text" class="form-control" id="lastName" />
+                        </div>
+                        <div class="form-group">
+                            <label for="firstName">First Name</label>
+                            <input type="text" class="form-control" id="firstName" />
+                        </div>
+                        <div class="form-group">
+                            <label for="middleName">Middle Name</label>
+                            <input type="text" class="form-control" id="middleName" />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="dateHired">Date Hired</label>
+                            <input type="date" class="form-control" id="dateHired" />
+                        </div>
+                        <div class="form-group">
+                            <img id="img" src="@Url.Content("~/Content/Images/preview.png")" class="img-thumbnail" height="150" width="150" />
+                        </div>
+                        <div class="form-group">
+                            <input type="file" class="form-control" id="imageFile" />
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-10">
+                                @*<input type="submit" value="Create" class="btn btn-default" />*@
+                                <button type="button" class="btn btn-primary" id="btnAdd" onclick="return Add();">Save</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+                <h4 class="modal-title" id="myModalLabel">Edit Employee</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="eId">ID</label>
+                        <input type="text" class="form-control" id="eId"  disabled="disabled"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="eLastName">Last Name</label>
+                        <input type="text" class="form-control" id="eLastName" />
+                    </div>
+                    <div class="form-group">
+                        <label for="eFirstName">First Name</label>
+                        <input type="text" class="form-control" id="eFirstName" />
+                    </div>
+                    <div class="form-group">
+                        <label for="eMiddleName">Middle Name</label>
+                        <input type="text" class="form-control" id="eMiddleName" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="eDateHired">Date Hired</label>
+                        <input type="date" class="form-control" id="eDateHired" />
+                    </div>
+                    <div class="form-group">
+                        <img id="eImg" src="@Url.Content("~/Content/Images/preview.png")" class="img-thumbnail" height="150" width="150" />
+                    </div>
+                    <div class="form-group">
+                        <input type="file" class="form-control" id="eImageFile" />
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="btnUpdate" onclick="return Update();">Update</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/Modules/Employee.js"></script>
+    @*<script>
+
+            $(function () {
+                $('#imageFile').change(function () {
+                    var input = this;
+                    var url = $(this).val();
+                    var ext = url.substring(url.lastIndexOf('.') + 1).toLowerCase();
+                    if (input.files && input.files[0] && (ext == "gif" || ext == "png" || ext == "jpeg" || ext == "jpg")) {
+                        var reader = new FileReader();
+
+                        reader.onload = function (e) {
+                            $('#img').attr('src', e.target.result);
+                        }
+                        reader.readAsDataURL(input.files[0]);
+                    }
+                    else {
+                        $('#img').attr('src', '@Url.Content("~/Content/Images/preview.png")');
+                    }
+                });
+
+            });
+        </script>*@
+}

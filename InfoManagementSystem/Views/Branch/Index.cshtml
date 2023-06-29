@@ -1,0 +1,84 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    
+}
+<h2>Branch List</h2>
+
+<p>@Html.ActionLink("Create New", "Create")</p>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+            <table class="table table-bordered table-striped" id="tblBranch">
+                <thead>
+                    <tr>
+                        <th scope="col">Branch Code</th>
+                        <th scope="col">Branch Name</th>
+                        <th scope="col">Branch Manager</th>
+                        <th scope="col">Date Opened</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function () {
+                bindDatatable();
+            });
+
+            function bindDatatable() {
+                datatable = $('#tblBranch')
+                    .DataTable({
+                        "sAjaxSource": "/Branch/GetData",
+                        "bServerSide": true,
+                        "bProcessing": true,
+                        "bSearchable": true,
+                        "order": [[1, 'asc']],
+                        "language": {
+                            "emptyTable": "No Data found. Click on Add New Button",
+                            "processing":
+                                '<i class="fa fa-spinner fa-spin fa-3x fa-fw" style="color:#2a2b2b;"></i><span class="sr-only">Loading...</span> '
+                        },
+                        "columns": [
+                            {
+                                "data": "Code",
+                                "autoWidth": true,
+                                "searchable": true
+                            },
+                            {
+                                "data": "Name",
+                                "autoWidth": true,
+                                "searchable": true
+                            },
+                            {
+                                "data": "BranchManager",
+                                "autoWidth": true,
+                                "searchable": true
+                            },
+                            {
+                                "data": "DateOpenedStrings",
+                                "autoWidth": true,
+                                "searchable": true
+                            },
+                            {
+                                "data": "Actions",
+                                "autoWidth": true,
+                                "searchable": true
+                            }
+                        ]
+                    });
+            }
+    </script>
+
+} 
