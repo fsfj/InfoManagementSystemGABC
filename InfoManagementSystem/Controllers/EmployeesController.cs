@@ -18,11 +18,9 @@ namespace InfoManagementSystem.Controllers
 {
     public class EmployeesController : Controller
     {
-        private IMDBContext db;
         private readonly IEmployeeService service;
-        public EmployeesController(IMDBContext db, IEmployeeService service)
+        public EmployeesController(IEmployeeService service)
         {
-            this.db = db;
             this.service = service;
         }
         // GET: Employees
@@ -65,8 +63,7 @@ namespace InfoManagementSystem.Controllers
                
             }
             var result = await service.InsertUpdate(emp);
-            //db.Employees.Add(emp);
-            //await db.SaveChangesAsync();
+
             return Json(new { success = result }, JsonRequestBehavior.AllowGet);
         }
 
@@ -92,15 +89,6 @@ namespace InfoManagementSystem.Controllers
         {
             var result = await service.Delete(id);
             return Json(new { success = result }, JsonRequestBehavior.AllowGet);
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
         }
     }
 }

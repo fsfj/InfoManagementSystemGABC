@@ -101,14 +101,6 @@ namespace InfoManagementSystem.Controllers
             return View(vm);
         }
 
-        //[HttpDelete]
-        //public async Task<ActionResult> Delete(string code)
-        //{
-        //    await service.Delete(code);
-
-        //    return Json(new { success = true }, JsonRequestBehavior.AllowGet);
-        //}
-
         public async Task<ActionResult> Edit(string code)
         {
             var result = await service.GetByCode(code);
@@ -153,8 +145,6 @@ namespace InfoManagementSystem.Controllers
             return View(vm);
         }
 
-
-        // GET: TestEmp/Delete/5
         public async Task<ActionResult> Delete(string code)
         {
             if (code == null)
@@ -169,7 +159,6 @@ namespace InfoManagementSystem.Controllers
             return View(branch);
         }
 
-        // POST: TestEmp/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(string code)
